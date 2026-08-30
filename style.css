@@ -251,11 +251,12 @@ nav {
     overflow: hidden;
 }
 
+/* Przekadrowane zdjęcie - głowa widoczna w całości */
 .hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: top center;
     display: block;
     transition: transform 0.5s ease;
 }
@@ -313,7 +314,6 @@ nav {
     border-radius: 100px;
 }
 
-/* Ilustracje Kategori (100% WIDOCZNE) */
 .package-icon-wrapper {
     width: 100%;
     height: 140px;
@@ -828,62 +828,87 @@ nav {
     line-height: 1.6;
 }
 
-/* Contact */
-.contact {
-    padding: 100px 0;
+/* Interaktywny Kalkulator Ceny (Nowość) */
+.calculator-section {
+    padding: 90px 0;
+    background: var(--bg-subtle);
 }
 
-.contact-box {
+.calculator-card {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
-    padding: 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    box-shadow: var(--shadow-subtle);
+    padding: 50px;
+    box-shadow: var(--shadow-hover);
 }
 
-.contact-info h2 {
+.calculator-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.calculator-header h2 {
     font-size: 2.8rem;
-    margin-bottom: 16px;
+    margin: 12px 0;
 }
 
-.contact-details {
-    margin-top: 32px;
+.calc-grid {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 32px;
 }
 
-.contact-detail-item {
-    display: flex;
-    align-items: center;
+.calc-label {
+    display: block;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+    color: var(--text-main);
+}
+
+.calc-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
 }
 
-.contact-detail-item .icon {
-    width: 44px;
-    height: 44px;
-    background: var(--bg-subtle);
-    border-radius: 50%;
+.option-card {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 18px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent-gold);
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    background: var(--bg-base);
+    transition: var(--transition);
 }
 
-.form-group {
-    margin-bottom: 20px;
+.option-card:hover {
+    border-color: var(--accent-gold);
+    background: #FFFFFF;
 }
 
-.form-group label {
-    display: block;
+.option-card input[type="radio"] {
+    margin-top: 4px;
+    accent-color: var(--accent-gold);
+}
+
+.option-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.option-content strong {
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+.option-content span {
     font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-top: 2px;
 }
 
 .form-control {
@@ -903,9 +928,71 @@ nav {
     background: #FFFFFF;
 }
 
-textarea.form-control {
-    resize: vertical;
-    min-height: 120px;
+.calc-checkboxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.checkbox-card {
+    background: var(--bg-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.checkbox-card:hover {
+    border-color: var(--border-gold);
+}
+
+.checkbox-card input[type="checkbox"] {
+    accent-color: var(--accent-gold);
+    width: 18px;
+    height: 18px;
+}
+
+.calc-summary {
+    margin-top: 40px;
+    padding: 24px 32px;
+    border-top: 2px dashed var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--accent-gold-soft);
+    border-radius: var(--radius-md);
+}
+
+.summary-text span {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.total-price-box {
+    font-family: var(--font-serif);
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1;
+}
+
+.total-price-box small {
+    font-size: 1.5rem;
+    font-family: var(--font-sans);
+    font-weight: 400;
+}
+
+.btn-lg {
+    padding: 18px 36px;
+    font-size: 1.05rem;
 }
 
 /* Footer */
@@ -958,7 +1045,7 @@ footer {
 
 /* Responsive Breakpoints */
 @media (max-width: 1024px) {
-    .hero-grid, .voucher-card, .contact-box {
+    .hero-grid, .voucher-card {
         grid-template-columns: 1fr;
         gap: 40px;
     }
@@ -970,6 +1057,20 @@ footer {
     }
     .gallery-item.large {
         grid-column: span 2;
+    }
+}
+
+@media (max-width: 900px) {
+    .calc-options, .calc-checkboxes {
+        grid-template-columns: 1fr;
+    }
+    .calc-summary {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .calculator-card {
+        padding: 24px;
     }
 }
 
@@ -1041,8 +1142,5 @@ footer {
     .process-steps, .features-grid, .packages-grid, .mat-list, .footer-grid {
         grid-template-columns: 1fr;
         gap: 16px;
-    }
-    .contact-box {
-        padding: 24px;
     }
 }
